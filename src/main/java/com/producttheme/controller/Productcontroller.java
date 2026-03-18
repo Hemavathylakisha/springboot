@@ -194,4 +194,133 @@ public class Productcontroller {
     public List<Products> findDistinctByCategory(@RequestParam String category){
     	return service.findDistinctByCategory(category);
     }
+    
+    //2.JPQL
+    @GetMapping("/products/category")
+    public List<Products> getByCategory(@RequestParam String category) {
+        return service.getByCategory(category);
+    }
+    
+    @GetMapping("/products/qexpensive")
+    public List<Products> getExpensive(@RequestParam Double price) {
+        return service.getExpensiveProducts(price);
+    }
+
+    // Search by name (LIKE)
+    @GetMapping("/products/qsearch")
+    public List<Products> getsearchByName(@RequestParam String name) {
+        return service.searchByName(name);
+    }
+
+    // Price range
+    @GetMapping("/products/qprice-range")
+    public List<Products> getByPriceRange(@RequestParam Double min,
+                                          @RequestParam Double max) {
+        return service.getByPriceRange(min, max);
+    }
+
+    // Count by category
+    @GetMapping("/products/qcount")
+    public long checkcountByCategory(@RequestParam String category) {
+        return service.checkcountByCategory(category);
+    }
+    
+    // LIKE
+    @GetMapping("/products/nqsearch")
+    public List<Products> search(@RequestParam String name) {
+        return service.nqfindByNameLike(name);
+    }
+
+    // NOT LIKE
+    @GetMapping("/products/nqsearch/not")
+    public List<Products> searchNot(@RequestParam String pattern) {
+        return service.nqfindByNameNotLike(pattern);
+    }
+
+    // IN
+    @GetMapping("/products/nqin")
+    public List<Products> nqfindIn(@RequestParam List<String> categories) {
+        return service.nqfindByCategoryIn(categories);
+    }
+
+    // NOT IN
+    @GetMapping("/products/nqnotin")
+    public List<Products> nqfindNotIn(@RequestParam List<String> categories) {
+        return service.nqfindByCategoryNotIn(categories);
+    }
+
+    // NULL
+    @GetMapping("/products/nqnull")
+    public List<Products> getNull() {
+        return service.nqfindCategoryNull();
+    }
+
+    // NOT NULL
+    @GetMapping("/products/nqnotnull")
+    public List<Products> getNotNull() {
+        return service.nqfindCategoryNotNull();
+    }
+
+    // SORT
+    @GetMapping("/products/nqsort")
+    public List<Products> sort() {
+        return service.sortByPriceDesc();
+    }
+
+    // GROUP BY
+    @GetMapping("/products/group")
+    public List<Object[]> group() {
+        return service.countByCategory();
+    }
+
+    //tasks
+ // Names by category
+    @GetMapping("/nq/names")
+    public List<String> getNames(@RequestParam String category) {
+        return service.namesByCategory(category);
+    }
+
+    // Price range
+    @GetMapping("/nq/range")
+    public List<Products> getRange(@RequestParam Double min, @RequestParam Double max) {
+        return service.priceRange(min, max);
+    }
+
+    // Top 5 expensive
+    @GetMapping("/nq/top5")
+    public List<Products> top5() {
+        return service.topExpensive();
+    }
+
+    // Count by price range
+    @GetMapping("/nq/count")
+    public long count(@RequestParam Double min, @RequestParam Double max) {
+        return service.countByPriceRange(min, max);
+    }
+
+    // Distinct names
+    @GetMapping("/nq/distinct")
+    public List<String> distinct() {
+        return service.distinctNames();
+    }
+
+    // Update by name
+    @PutMapping("/nq/update")
+    public String update(@RequestParam String name, @RequestParam Double price) {
+        service.updateByName(name, price);
+        return "Updated";
+    }
+
+    // Not available names
+    @GetMapping("/nq/not-available")
+    public List<String> notAvailable() {
+        return service.notAvailableNames();
+    }
+
+    //  Delete not available
+    @DeleteMapping("/nq/delete-not-available")
+    public String delete() {
+        service.deleteNotAvailable();
+        return "Deleted";
+    }
 }

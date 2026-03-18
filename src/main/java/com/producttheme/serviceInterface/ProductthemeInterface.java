@@ -2,6 +2,8 @@ package com.producttheme.serviceInterface;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.producttheme.model.Products;
 
 public interface ProductthemeInterface {
@@ -78,4 +80,50 @@ public interface ProductthemeInterface {
 
 	//distinct
 	List<Products> findDistinctByCategory(String category);
+	
+	//2.JPQL 
+	List<Products> getByCategory(@Param("category") String category);
+	
+	List<Products> getExpensiveProducts(Double price);
+
+    List<Products> searchByName(String name);
+
+    List<Products> getByPriceRange(Double min, Double max);
+
+    long checkcountByCategory(String category);
+    
+    //named queries
+    List<Products> nqfindByNameLike(@Param("name") String name);
+    
+    List<Products> nqfindByNameNotLike(@Param("pattern") String pattern);
+    
+    List<Products> nqfindByCategoryIn(@Param("categories") List<String> categories);
+    
+    List<Products> nqfindByCategoryNotIn(@Param("categories") List<String> categories);
+
+    List<Products> nqfindCategoryNull();
+    
+    List<Products> nqfindCategoryNotNull();
+    
+    List<Products> sortByPriceDesc();
+    
+    List<Object[]> countByCategory();
+    
+    //tasks
+    List<String> namesByCategory(String category);
+
+    List<Products> priceRange(Double min, Double max);
+
+    List<Products> topExpensive();
+
+    long countByPriceRange(Double min, Double max);
+
+    List<String> distinctNames();
+
+    void updateByName(String name, Double price);
+
+    List<String> notAvailableNames();
+
+    void deleteNotAvailable();
+
 }

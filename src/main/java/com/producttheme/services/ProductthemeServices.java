@@ -3,6 +3,7 @@ package com.producttheme.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.producttheme.model.Products;
@@ -164,4 +165,94 @@ public class ProductthemeServices implements ProductthemeInterface{
 		public List<Products> findDistinctByCategory(String category) {
 			return repository.findDistinctByCategory(category);
 		}
+
+		@Override
+		public List<Products> getByCategory(String category) {
+			return repository.getByCategory(category);
+		}
+
+		@Override
+		public List<Products> getExpensiveProducts(Double price) {
+			return repository.getExpensiveProducts(price);
+		}
+
+		@Override
+		public List<Products> searchByName(String name) {
+			return repository.searchByName(name);
+		}
+
+		@Override
+		public List<Products> getByPriceRange(Double min, Double max) {
+			return repository.getByPriceRange(min, max);
+		}
+
+		@Override
+		public long checkcountByCategory(String category) {
+			return repository.checkcountByCategory(category);
+		}
+		
+		public List<Products> nqfindByNameLike(String name) {
+	        return repository.nqfindByNameLike(name);
+	    }
+
+	    public List<Products> nqfindByNameNotLike(String pattern) {
+	        return repository.nqfindByNameNotLike(pattern);
+	    }
+
+	    public List<Products> nqfindByCategoryIn(List<String> categories) {
+	        return repository.nqfindByCategoryIn(categories);
+	    }
+
+	    public List<Products> nqfindByCategoryNotIn(List<String> categories) {
+	        return repository.nqfindByCategoryNotIn(categories);
+	    }
+
+	    public List<Products> nqfindCategoryNull() {
+	        return repository.nqfindCategoryNull();
+	    }
+
+	    public List<Products> nqfindCategoryNotNull() {
+	        return repository.nqfindCategoryNotNull();
+	    }
+
+	    public List<Products> sortByPriceDesc() {
+	        return repository.sortByPriceDesc();
+	    }
+
+	    public List<Object[]> countByCategory() {
+	        return repository.countByCategory();
+	    }
+	   
+	    //tasks
+	    public List<String> namesByCategory(String category) {
+	        return repository.namesByCategory(category);
+	    }
+
+	    public List<Products> priceRange(Double min, Double max) {
+	        return repository.priceRange(min, max);
+	    }
+
+	    public List<Products> topExpensive() {
+	        return repository.topExpensive(PageRequest.of(0, 5));
+	    }
+
+	    public long countByPriceRange(Double min, Double max) {
+	        return repository.countByPriceRange(min, max);
+	    }
+
+	    public List<String> distinctNames() {
+	        return repository.distinctNames();
+	    }
+
+	    public void updateByName(String name, Double price) {
+	    	repository.updateByName(name, price);
+	    }
+
+	    public List<String> notAvailableNames() {
+	        return repository.notAvailableNames();
+	    }
+
+	    public void deleteNotAvailable() {
+	    	repository.deleteNotAvailable();
+	    }
 }
