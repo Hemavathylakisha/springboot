@@ -272,7 +272,13 @@ public class Productcontroller {
     public List<Object[]> group() {
         return service.countByCategory();
     }
-
+    
+    // HAVING
+    @GetMapping("/products/having")
+    public List<Object[]> having(@RequestParam Long count) {
+        return service.categoryHavingCount(count);
+    }
+    
     //tasks
  // Names by category
     @GetMapping("/nq/names")
@@ -322,5 +328,20 @@ public class Productcontroller {
     public String delete() {
         service.deleteNotAvailable();
         return "Deleted";
+    }
+    
+    //Native query methods
+    @GetMapping("nq/getall")
+    public List<Products> nqgetAll(){
+    	return service.nqgetAllProducts();
+    }
+    
+    @GetMapping("nq/categories")
+    public List<Products> nqgetByCategory(@RequestParam String category){
+    	return service.nqgetByCategory(category);
+    }
+    @GetMapping("nq/products/top5")
+    public List<Products> top5Expensive(){
+    	return service.top5Expensive();
     }
 }

@@ -117,6 +117,9 @@ public interface Productthemerepository extends JpaRepository<Products, Integer>
 
     @Query(name = "Products.countByCategory")
     List<Object[]> countByCategory();
+    
+    @Query(name = "Products.categoryHavingCount")
+    List<Object[]> categoryHavingCount(@Param("count") Long count);
 
     //tasks
     @Query(name = "Products.namesByCategory")
@@ -146,4 +149,15 @@ public interface Productthemerepository extends JpaRepository<Products, Integer>
     @Transactional
     @Query(name = "Products.deleteNotAvailable")
     void deleteNotAvailable();
+    
+    //Native Query
+    @Query(value="Select * from Products", nativeQuery=true)
+    List<Products> nqgetAllProducts();
+    
+    @Query(value = "SELECT * FROM products WHERE category = :category", nativeQuery = true)
+    List<Products> nqgetByCategory(String category);
+    
+    // Top 5 Expensive Products
+    @Query(value = "SELECT * FROM products ORDER BY price DESC LIMIT 5", nativeQuery = true)
+    List<Products> top5Expensive();
 }

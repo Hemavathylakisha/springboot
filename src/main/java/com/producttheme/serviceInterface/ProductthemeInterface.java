@@ -109,6 +109,8 @@ public interface ProductthemeInterface {
     
     List<Object[]> countByCategory();
     
+    List<Object[]> categoryHavingCount(Long count);
+    
     //tasks
     List<String> namesByCategory(String category);
 
@@ -126,4 +128,10 @@ public interface ProductthemeInterface {
 
     void deleteNotAvailable();
 
+    //Native Query
+    List<Products> nqgetAllProducts();
+    
+    List<Products> nqgetByCategory(String category);
+    
+    List<Products> top5Expensive();
 }

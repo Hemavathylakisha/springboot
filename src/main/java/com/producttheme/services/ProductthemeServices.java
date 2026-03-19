@@ -222,6 +222,10 @@ public class ProductthemeServices implements ProductthemeInterface{
 	    public List<Object[]> countByCategory() {
 	        return repository.countByCategory();
 	    }
+	    
+	    public List<Object[]> categoryHavingCount(Long count) {
+	        return repository.categoryHavingCount(count);
+	    }
 	   
 	    //tasks
 	    public List<String> namesByCategory(String category) {
@@ -254,5 +258,18 @@ public class ProductthemeServices implements ProductthemeInterface{
 
 	    public void deleteNotAvailable() {
 	    	repository.deleteNotAvailable();
+	    }
+	    
+	    //Native Query
+	    public List<Products> nqgetAllProducts() {
+	    	return repository.nqgetAllProducts();
+	    }
+	    
+	    public List<Products> nqgetByCategory(String category){
+	    	return repository.nqgetByCategory(category);
+	    }
+	    
+	    public List<Products> top5Expensive(){
+	    	return repository.top5Expensive();
 	    }
 }
