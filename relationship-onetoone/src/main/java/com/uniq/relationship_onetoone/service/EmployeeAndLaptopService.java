@@ -54,7 +54,6 @@ public class EmployeeAndLaptopService implements EmployeeAndLaptopServiceInterfa
 	
 	//setter
 		emp.setLaptop(lap);
-		lap.setEmployee(emp);
 		
 		//save updated
 		employeeRepository.save(emp);
