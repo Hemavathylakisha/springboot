@@ -1,6 +1,10 @@
 package com.UserManagement.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,10 +23,19 @@ public class Students {
 	private String name;
 	private String deptName;
 	private String city;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="lapId")  //FK column
+	@JsonManagedReference 
 	private Laptop laptop;
 	
+	public Laptop getLaptop() {
+		return laptop;
+	}
+
+	public void setLaptop(Laptop laptop) {
+		this.laptop = laptop;
+	}
+
 	public Students() {
 		super();
 	}
