@@ -21,8 +21,12 @@ public class EmployeeService implements  EmployeeServiceInterface
     @Override
     public Employee getEmployee(int id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("The given id is not present"));
+        
     }
-
+    public String getEmployeedata(int id) {
+        Employee emp=repository.findById(id).orElseThrow(() -> new RuntimeException("The given id is not present"));
+        return emp.getDept();
+    }
     @Override
     public Employee saveEmployee(String name, String dept) {
         //parameter value - entity
